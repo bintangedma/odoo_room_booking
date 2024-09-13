@@ -1,0 +1,49 @@
+<odoo>
+    <record id="view_room_booking_tree" model="ir.ui.view">
+        <field name="name">room.booking.tree</field>
+        <field name="model">room.booking</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="room_id"/>
+                <field name="booking_name"/>
+                <field name="booking_date"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_room_booking_form" model="ir.ui.view">
+        <field name="name">room.booking.form</field>
+        <field name="model">room.booking</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="room_id"/>
+                        <field name="booking_name"/>
+                        <field name="booking_date"/>
+                        <field name="status" readonly="1"/>
+                        <field name="notes"/>
+                    </group>
+                    <footer>
+                        <button string="Start Booking" type="object" name="action_start_booking" state="draft"/>
+                        <button string="Complete Booking" type="object" name="action_complete_booking" state="ongoing"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="room_booking_action" model="ir.actions.act_window">
+        <field name="name">Booking Ruangan</field>
+        <field name="res_model">room.booking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_room_booking_tree"/>
+    </record>
+
+    <menuitem id="room_management_menu" name="Room Management" sequence="9"/>
+    <menuitem id="room_booking_menu" name="Booking Ruangan" parent="room_management_menu" action="room_booking_action"/>
+
+</odoo>
